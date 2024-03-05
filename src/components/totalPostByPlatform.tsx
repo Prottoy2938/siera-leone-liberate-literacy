@@ -71,7 +71,7 @@ const TotalPostByPlatform = () => {
   return (
     <Box textAlign={"center"}>
       {loading ? (
-        <Box pos="fixed" left="45vw" top="45vh">
+        <Box pos="fixed" left="49vw" top="45vh">
           <Spinner />
         </Box>
       ) : (

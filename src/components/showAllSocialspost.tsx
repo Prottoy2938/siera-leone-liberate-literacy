@@ -87,13 +87,13 @@ const ShowAllSocialPosts = () => {
   return (
     <>
       {loading ? (
-        <Box pos="fixed" left="45vw" top="45vh">
+        <Box pos="fixed" left="49vw" top="45vh">
           <Spinner />
         </Box>
       ) : (
         <Box width="90%" m="0 auto">
           <Heading size="md" textAlign={"center"} mb={5}>
-            See Latest Posts
+            See Latest Posts (upto 30)
           </Heading>
           <Accordion allowToggle>
             <AccordionItem>

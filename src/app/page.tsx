@@ -6,7 +6,7 @@ import ShowAllSocialPosts from "../components/showAllSocialspost";
 
 export default function Home() {
   return (
-    <Box mt={5}>
+    <Box mt={5} mb={10}>
       <Box mb={10}>
         <h1 className="text-center text-4xl font-extrabold leading-12 tracking-tight text-gray-900">
           Liberate Literacy Social Media Campaign <br />{" "}
@@ -26,8 +26,8 @@ export default function Home() {
         {" "}
         <ShowAllSocialPosts />
       </Box>
-      <Grid templateColumns="repeat(3, 1fr)" gap={10} p="0">
-        <GridItem colSpan={1} bg="gray.50">
+      <Grid templateColumns="repeat(3, 1fr)" gap={10} p="5">
+        <GridItem colSpan={1} bg="gray.50" p={8}>
           {" "}
           <TotalPostByPlatform />
         </GridItem>

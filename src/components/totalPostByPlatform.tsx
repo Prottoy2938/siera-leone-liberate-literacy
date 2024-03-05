@@ -69,16 +69,34 @@ const TotalPostByPlatform = () => {
   }, []);
 
   return (
-    <Box>
+    <Box textAlign={"center"}>
       {loading ? (
         <Box pos="fixed" left="45vw" top="45vh">
           <Spinner />
         </Box>
       ) : (
         <>
+          <Heading size="md" mb={5}>
+            Total Posts Across Social Media
+          </Heading>
           <Pie
+            options={{
+              plugins: {
+                legend: {
+                  labels: {
+                    font: {
+                      size: 16, // Change this value to increase or decrease the font size
+                    },
+                  },
+                },
+              },
+            }}
             data={{
-              labels: ["Facebook", "Instagram", "Twitter"],
+              labels: [
+                `Facebook ${totalFacebookPost}`,
+                `Instagram ${totalInstagramPost}`,
+                `Twitter ${totalTwitterPost}`,
+              ],
               datasets: [
                 {
                   data: [
@@ -91,16 +109,6 @@ const TotalPostByPlatform = () => {
               ],
             }}
           />
-
-          <Heading variant="h6">
-            Total Facebook Posts: {totalFacebookPost}
-          </Heading>
-          <Heading variant="h6">
-            Total Instagram Posts: {totalInstagramPost}
-          </Heading>
-          <Heading variant="h6">
-            Total Twitter Posts: {totalTwitterPost}
-          </Heading>
         </>
       )}
     </Box>

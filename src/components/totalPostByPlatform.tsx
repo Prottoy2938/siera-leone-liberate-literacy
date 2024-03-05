@@ -77,7 +77,7 @@ const TotalPostByPlatform = () => {
       ) : (
         <>
           <Heading size="md" mb={5}>
-            Total Posts Across Social Media
+            Total Posts by Platform
           </Heading>
           <Pie
             options={{

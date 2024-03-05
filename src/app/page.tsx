@@ -1,20 +1,37 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import TotalPostByPlatform from "../components/totalPostByPlatform";
 import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
 import ShowAllSocialPosts from "../components/showAllSocialspost";
-import GoogleMapReact from "google-map-react";
-const defaultProps = {
-  center: {
-    lat: 10.99835602,
-    lng: 77.01502627,
-  },
-  zoom: 11,
+import { Line } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
+
+Chart.register(...registerables);
+
+const chartData = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+  datasets: [
+    {
+      label: "Facebook",
+      data: [10, 40, 30, 100, 50],
+      fill: false,
+      borderColor: "#ffd400",
+      tension: 0.1,
+    },
+    {
+      label: "Twitter",
+      data: [5, 10, 100, 60, 90],
+      fill: false,
+      borderColor: "#001aff",
+      tension: 0.1,
+    },
+  ],
 };
 
 export default function Home() {
   return (
-    <Box mt={5} mb={10}>
+    <Box mt={5} mb="200px">
       <Box mb={10}>
         <h1 className="text-center text-4xl font-extrabold leading-12 tracking-tight text-gray-900">
           Liberate Literacy Social Media Campaign <br />{" "}
@@ -114,6 +131,22 @@ export default function Home() {
           </GridItem>
         </GridItem>
       </Grid>
+      <Heading mt="200px" textAlign={"center"}>
+        Top Posts on Different Platforms
+      </Heading>
+
+      <Box mt={20} padding={20} height="700px" justifyContent={"center"}>
+        <Heading
+          m="0 auto"
+          mb={10}
+          borderBottom={"18px solid #ffd400"}
+          display="table"
+          textAlign={"center"}
+        >
+          Trends Over Time
+        </Heading>
+        <Line data={chartData} style={{ margin: "0 auto" }} />
+      </Box>
     </Box>
   );
 }

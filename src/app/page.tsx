@@ -6,7 +6,7 @@ import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
 import ShowAllSocialPosts from "../components/showAllSocialspost";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 Chart.register(...registerables);
 
 const chartData = {
@@ -131,21 +131,49 @@ export default function Home() {
           </GridItem>
         </GridItem>
       </Grid>
-      <Heading mt="200px" textAlign={"center"}>
-        Top Posts on Different Platforms
-      </Heading>
+      <Box m="auto" mt="200px" mb={"300px"} width="90&">
+        <Heading mb={20} textAlign={"center"}>
+          Top Posts on Different Platforms
+        </Heading>
+        <Tabs variant="soft-rounded" colorScheme="green" isFitted px={10}>
+          <TabList>
+            <Tab>Facebook</Tab>
+            <Tab>Instagram</Tab>
+            <Tab>Twitter</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <p>Still Analyzing Data</p>
+            </TabPanel>
+            <TabPanel>
+            <p>Still Analyzing Data</p>
+
+            </TabPanel>
+            <TabPanel>
+            <p>Still Analyzing Data</p>
+
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
 
       <Box mt={20} padding={20} height="700px" justifyContent={"center"}>
         <Heading
           m="0 auto"
-          mb={10}
+          mb={20}
           borderBottom={"18px solid #ffd400"}
           display="table"
           textAlign={"center"}
         >
           Trends Over Time
         </Heading>
-        <Line data={chartData} style={{ margin: "0 auto" }} />
+        <Line
+          width="1000px"
+          height="500px"
+          data={chartData}
+          style={{ margin: "0 auto" }}
+        />
       </Box>
     </Box>
   );

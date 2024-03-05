@@ -1,7 +1,6 @@
 import { AuthContextProvider } from "@/context/AuthContext";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import theme from "../theme";
 import { Providers } from "./provider";
 
 // Load the Inter font with 'latin' subset

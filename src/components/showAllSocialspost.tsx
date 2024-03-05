@@ -14,6 +14,12 @@ import {
   Th,
   Thead,
   Tr,
+  Accordion,
+  Spinner,
+  AccordionItem,
+  AccordionButton,
+  Heading,
+  AccordionPanel,
 } from "@chakra-ui/react";
 
 import {
@@ -22,6 +28,7 @@ import {
   query,
   getFirestore,
   where,
+  orderBy,
   limit,
 } from "firebase/firestore";
 import firebase_app from "../firebase/config";
@@ -38,9 +45,22 @@ const ShowAllSocialPosts = () => {
     const fetchPosts = async () => {
       try {
         setLoading(false);
-        const instagramQuery = query(collection(db, "instagram"), limit(30));
-        const twitterQuery = query(collection(db, "twitter"), limit(30));
-        const facebookQuery = query(collection(db, "facebook"), limit(30));
+
+        const instagramQuery = query(
+          collection(db, "instagram"),
+          limit(30),
+          orderBy("createdAt")
+        );
+        const twitterQuery = query(
+          collection(db, "twitter"),
+          limit(30),
+          orderBy("createdAt")
+        );
+        const facebookQuery = query(
+          collection(db, "facebook"),
+          limit(30),
+          orderBy("createdAt")
+        );
 
         const [instagramSnapshot, twitterSnapshot, facebookSnapshot] =
           await Promise.all([
@@ -65,63 +85,96 @@ const ShowAllSocialPosts = () => {
   }, []);
 
   return (
-    <Tabs>
-      <TabList>
-        <Tab>Instagram</Tab>
-        <Tab>Twitter</Tab>
-        <Tab>Facebook</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>Post</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {instagramPosts.map((post, index) => (
-                <Tr key={index}>
-                  <Td>{index}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TabPanel>
-        <TabPanel>
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>Post</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {twitterPosts.map((post, index) => (
-                <Tr key={index}>
-                  <Td>{index}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TabPanel>
-        <TabPanel>
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>Post</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {facebookPosts.map((post, index) => (
-                <Tr key={index}>
-                  <Td>{index}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+    <>
+      {loading ? (
+        <Box pos="fixed" left="45vw" top="45vh">
+          <Spinner />
+        </Box>
+      ) : (
+        <Box width="90%" m="0 auto">
+          <Heading size="md" textAlign={"center"} mb={5}>
+            See Latest Posts
+          </Heading>
+          <Accordion allowToggle>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    Instagram
+                  </Box>
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>Post</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {instagramPosts.map((post, index) => (
+                      <Tr key={index}>
+                        <Td>{index}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    Twitter
+                  </Box>
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>Post</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {twitterPosts.map((post, index) => (
+                      <Tr key={index}>
+                        <Td>{index}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    Facebook
+                  </Box>
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>Post</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {facebookPosts.map((post, index) => (
+                      <Tr key={index}>
+                        <Td>{index}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        </Box>
+      )}
+    </>
   );
 };
 

@@ -19,6 +19,7 @@ import {
   AccordionItem,
   AccordionButton,
   Heading,
+  HStack,
   AccordionPanel,
 } from "@chakra-ui/react";
 
@@ -32,6 +33,8 @@ import {
   limit,
 } from "firebase/firestore";
 import firebase_app from "../firebase/config";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { Link } from "@chakra-ui/react";
 
 const db = getFirestore(firebase_app);
 
@@ -48,17 +51,17 @@ const ShowAllSocialPosts = () => {
 
         const instagramQuery = query(
           collection(db, "instagram"),
-          limit(30),
+          limit(100),
           orderBy("createdAt")
         );
         const twitterQuery = query(
           collection(db, "twitter"),
-          limit(30),
+          limit(100),
           orderBy("createdAt")
         );
         const facebookQuery = query(
           collection(db, "facebook"),
-          limit(30),
+          limit(100),
           orderBy("createdAt")
         );
 
@@ -93,7 +96,7 @@ const ShowAllSocialPosts = () => {
       ) : (
         <Box width="90%" m="0 auto">
           <Heading size="md" textAlign={"center"} mb={5}>
-            See Latest Posts (upto 30)
+            Recent Posts
           </Heading>
           <Accordion allowToggle>
             <AccordionItem>
@@ -111,35 +114,18 @@ const ShowAllSocialPosts = () => {
                       <Th>Post</Th>
                     </Tr>
                   </Thead>
-                  <Tbody>
+                  <Tbody mt={20}>
                     {instagramPosts.map((post, index) => (
-                      <Tr key={index}>
-                        <Td>{index}</Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem>
-              <h2>
-                <AccordionButton>
-                  <Box flex="1" textAlign="left">
-                    Twitter
-                  </Box>
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
-                <Table>
-                  <Thead>
-                    <Tr>
-                      <Th>Post</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {twitterPosts.map((post, index) => (
-                      <Tr key={index}>
-                        <Td>{index}</Td>
+                      <Tr key={index} mt={5}>
+                        <Link href={post.url}>
+                          <HStack spacing="24px">
+                            <FaInstagram display={"inline"} color="#E4405F" />
+                            <span style={{ color: "#E4405F" }}>
+                              {" "}
+                              {post.url}
+                            </span>
+                          </HStack>
+                        </Link>
                       </Tr>
                     ))}
                   </Tbody>
@@ -164,7 +150,42 @@ const ShowAllSocialPosts = () => {
                   <Tbody>
                     {facebookPosts.map((post, index) => (
                       <Tr key={index}>
-                        <Td>{index}</Td>
+                        <Link href={post.url}>
+                          <HStack spacing="24px">
+                            <FaFacebook display={"inline"} color="#1877F2" />
+                            <span style={{ color: "#1877F2" }}>
+                              {" "}
+                              {post.url}
+                            </span>
+                          </HStack>
+                        </Link>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    Twitter
+                  </Box>
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>Post</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {twitterPosts.map((post, index) => (
+                      <Tr key={index}>
+                        <Link href={post.url}>
+                          <FaTwitter /> {post.url}
+                        </Link>
                       </Tr>
                     ))}
                   </Tbody>

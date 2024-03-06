@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import TotalPostByPlatform from "../components/totalPostByPlatform";
 import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
 import ShowAllSocialPosts from "../components/showAllSocialspost";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+
 Chart.register(...registerables);
 
 const chartData = {
@@ -14,14 +14,21 @@ const chartData = {
   datasets: [
     {
       label: "Facebook",
-      data: [10, 40, 30, 100, 50],
+      data: [0, 0, 0, 0, 0],
       fill: false,
       borderColor: "#ffd400",
       tension: 0.1,
     },
     {
+      label: "Instagram",
+      data: [0, 0, 0, 0, 0],
+      fill: false,
+      borderColor: "purple",
+      tension: 0.1,
+    },
+    {
       label: "Twitter",
-      data: [5, 10, 100, 60, 90],
+      data: [0, 0, 0, 0, 0],
       fill: false,
       borderColor: "#001aff",
       tension: 0.1,
@@ -144,15 +151,13 @@ export default function Home() {
 
           <TabPanels>
             <TabPanel>
-              <p>Still Analyzing Data</p>
+              <p>Still Analyzing Data...</p>
             </TabPanel>
             <TabPanel>
-            <p>Still Analyzing Data</p>
-
+              <p>Still Analyzing Data...</p>
             </TabPanel>
             <TabPanel>
-            <p>Still Analyzing Data</p>
-
+              <p>Still Analyzing Data...</p>
             </TabPanel>
           </TabPanels>
         </Tabs>

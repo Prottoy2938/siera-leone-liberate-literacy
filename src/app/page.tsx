@@ -23,7 +23,7 @@ const chartData = {
       label: "Instagram",
       data: [0, 0, 0, 0, 0],
       fill: false,
-      borderColor: "purple",
+      borderColor: "#1DA1F2",
       tension: 0.1,
     },
     {

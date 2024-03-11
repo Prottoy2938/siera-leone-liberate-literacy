@@ -297,7 +297,7 @@ export default function Home() {
                       {/* @ts-expect-error */}
                       <Link href={post.url}>
                         <HStack spacing="24px">
-                          <FaFacebook display={"inline"} color="#1877F2" />
+                          <FaTwitter display={"inline"} color="#1877F2" />
                           {/* @ts-expect-error */}
                           <span style={{ color: "#1877F2" }}> {post.url}</span>
                         </HStack>

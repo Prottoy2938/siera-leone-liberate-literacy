@@ -5,9 +5,37 @@ import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
 import ShowAllSocialPosts from "../components/showAllSocialspost";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  HStack,
+} from "@chakra-ui/react";
+import firebase_app from "../firebase/config";
+import {
+  collection,
+  getDocs,
+  query,
+  getFirestore,
+  where,
+  orderBy,
+  limit,
+} from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { Link } from "@chakra-ui/react";
 
 Chart.register(...registerables);
+
+const db = getFirestore(firebase_app);
 
 const chartData = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May"],
@@ -37,6 +65,73 @@ const chartData = {
 };
 
 export default function Home() {
+  const [topInstaPosts, setTopInstaPosts] = useState([]);
+  const [topFbPosts, setTopFbPosts] = useState([]);
+  const [topTwitterPost, setTopTwitterPost] = useState([]);
+
+  useEffect(() => {
+    // Reference to your collection
+    const collectionRef = collection(db, "twitter");
+
+    // Query documents sorted by retweet_count in descending order and limit to 50
+    const fbTopPosts = query(
+      collectionRef,
+      orderBy("likesCount", "desc"),
+      limit(15)
+    );
+
+    const instaTopPosts = query(
+      collectionRef,
+      orderBy("likesCount", "desc"),
+      limit(15)
+    );
+
+    const twitterTopPosts = query(
+      collectionRef,
+      orderBy("public_metrics.retweet_count", "desc"),
+      limit(15)
+    );
+
+    getDocs(twitterTopPosts)
+      .then((querySnapshot) => {
+        const allTwitterTopPosts: any = [];
+        querySnapshot.forEach((doc) => {
+          allTwitterTopPosts.push(doc.data());
+          // console.log(doc.id, " => ", doc.data());
+        });
+        setTopTwitterPost(allTwitterTopPosts);
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+
+    getDocs(fbTopPosts)
+      .then((querySnapshot) => {
+        const allTwitterTopPosts: any = [];
+        querySnapshot.forEach((doc) => {
+          allTwitterTopPosts.push(doc.data());
+          // console.log(doc.id, " => ", doc.data());
+        });
+        setTopFbPosts(allTwitterTopPosts);
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+
+    getDocs(instaTopPosts)
+      .then((querySnapshot) => {
+        const allTwitterTopPosts: any = [];
+        querySnapshot.forEach((doc) => {
+          allTwitterTopPosts.push(doc.data());
+          // console.log(doc.id, " => ", doc.data());
+        });
+        setTopInstaPosts(allTwitterTopPosts);
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  }, []);
+
   return (
     <Box mt={5} mb="200px">
       <Box mb={10}>
@@ -113,15 +208,7 @@ export default function Home() {
             <Heading size="md" mb={5}>
               Geographical Distribution
             </Heading>
-            <Box w="90%" height="90%">
-              {/* <GoogleMapReact
-                bootstrapURLKeys={{
-                  key: "AIzaSyDs6vyQzE2cTLFlhtmTd0HHA0HNnsy8N3U",
-                }}
-                defaultCenter={defaultProps.center}
-                defaultZoom={defaultProps.zoom}
-              ></GoogleMapReact> */}
-            </Box>
+            <Box w="90%" height="90%"></Box>
           </GridItem>
         </GridItem>
         <GridItem colSpan={1}>
@@ -151,13 +238,67 @@ export default function Home() {
 
           <TabPanels>
             <TabPanel>
-              <p>Still Analyzing Data...</p>
+              <Table>
+                <Thead>
+                  <Tr>
+                    <Th>Post</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {topFbPosts.map((post, index) => (
+                    <Tr key={index}>
+                      <Link href={post.url}>
+                        <HStack spacing="24px">
+                          <FaFacebook display={"inline"} color="#1877F2" />
+                          <span style={{ color: "#1877F2" }}> {post.url}</span>
+                        </HStack>
+                      </Link>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
             </TabPanel>
             <TabPanel>
-              <p>Still Analyzing Data...</p>
+              <Table>
+                <Thead>
+                  <Tr>
+                    <Th>Post</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {topFbPosts.map((post, index) => (
+                    <Tr key={index}>
+                      <Link href={post.url}>
+                        <HStack spacing="24px">
+                          <FaInstagram display={"inline"} color="#1877F2" />
+                          <span style={{ color: "#1877F2" }}> {post.url}</span>
+                        </HStack>
+                      </Link>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
             </TabPanel>
             <TabPanel>
-              <p>Still Analyzing Data...</p>
+              <Table>
+                <Thead>
+                  <Tr>
+                    <Th>Post</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {topFbPosts.map((post, index) => (
+                    <Tr key={index}>
+                      <Link href={post.url}>
+                        <HStack spacing="24px">
+                          <FaFacebook display={"inline"} color="#1877F2" />
+                          <span style={{ color: "#1877F2" }}> {post.url}</span>
+                        </HStack>
+                      </Link>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -70,23 +70,22 @@ export default function Home() {
 
   useEffect(() => {
     // Reference to your collection
-    const collectionRef = collection(db, "twitter");
 
     // Query documents sorted by retweet_count in descending order and limit to 50
     const fbTopPosts = query(
-      collectionRef,
+      collection(db, "facebook"),
       orderBy("likesCount", "desc"),
       limit(15)
     );
 
     const instaTopPosts = query(
-      collectionRef,
+      collection(db, "instagram"),
       orderBy("likesCount", "desc"),
       limit(15)
     );
 
     const twitterTopPosts = query(
-      collectionRef,
+      collection(db, "twitter"),
       orderBy("public_metrics.retweet_count", "desc"),
       limit(15)
     );
@@ -98,7 +97,7 @@ export default function Home() {
           allTwitterTopPosts.push(doc.data());
           // console.log(doc.id, " => ", doc.data());
         });
-        console.log(allTwitterTopPosts);
+        console.log(allTwitterTopPosts, "twitter");
         setTopTwitterPost(allTwitterTopPosts);
       })
       .catch((error) => {
@@ -112,7 +111,7 @@ export default function Home() {
           allTwitterTopPosts.push(doc.data());
           // console.log(doc.id, " => ", doc.data());
         });
-        console.log(allTwitterTopPosts);
+        console.log(allTwitterTopPosts, "fb");
         setTopFbPosts(allTwitterTopPosts);
       })
       .catch((error) => {
@@ -126,7 +125,7 @@ export default function Home() {
           allTwitterTopPosts.push(doc.data());
           // console.log(doc.id, " => ", doc.data());
         });
-        console.log(allTwitterTopPosts);
+        console.log(allTwitterTopPosts, "insta");
         setTopInstaPosts(allTwitterTopPosts);
       })
       .catch((error) => {

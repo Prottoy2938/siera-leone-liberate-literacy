@@ -34,7 +34,6 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "@chakra-ui/react";
 
 Chart.register(...registerables);
-
 const db = getFirestore(firebase_app);
 
 const chartData = {
@@ -247,9 +246,11 @@ export default function Home() {
                 <Tbody>
                   {topFbPosts.map((post, index) => (
                     <Tr key={index}>
+                      {/* @ts-expect-error */}
                       <Link href={post.url}>
                         <HStack spacing="24px">
                           <FaFacebook display={"inline"} color="#1877F2" />
+                          {/* @ts-expect-error */}
                           <span style={{ color: "#1877F2" }}> {post.url}</span>
                         </HStack>
                       </Link>
@@ -268,9 +269,11 @@ export default function Home() {
                 <Tbody>
                   {topFbPosts.map((post, index) => (
                     <Tr key={index}>
+                      {/* @ts-expect-error */}
                       <Link href={post.url}>
                         <HStack spacing="24px">
                           <FaInstagram display={"inline"} color="#1877F2" />
+                          {/* @ts-expect-error */}
                           <span style={{ color: "#1877F2" }}> {post.url}</span>
                         </HStack>
                       </Link>
@@ -289,9 +292,11 @@ export default function Home() {
                 <Tbody>
                   {topFbPosts.map((post, index) => (
                     <Tr key={index}>
+                      {/* @ts-expect-error */}
                       <Link href={post.url}>
                         <HStack spacing="24px">
                           <FaFacebook display={"inline"} color="#1877F2" />
+                          {/* @ts-expect-error */}
                           <span style={{ color: "#1877F2" }}> {post.url}</span>
                         </HStack>
                       </Link>

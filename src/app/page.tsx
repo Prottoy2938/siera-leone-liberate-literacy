@@ -98,6 +98,7 @@ export default function Home() {
           allTwitterTopPosts.push(doc.data());
           // console.log(doc.id, " => ", doc.data());
         });
+        console.log(allTwitterTopPosts);
         setTopTwitterPost(allTwitterTopPosts);
       })
       .catch((error) => {
@@ -111,6 +112,7 @@ export default function Home() {
           allTwitterTopPosts.push(doc.data());
           // console.log(doc.id, " => ", doc.data());
         });
+        console.log(allTwitterTopPosts);
         setTopFbPosts(allTwitterTopPosts);
       })
       .catch((error) => {
@@ -124,6 +126,7 @@ export default function Home() {
           allTwitterTopPosts.push(doc.data());
           // console.log(doc.id, " => ", doc.data());
         });
+        console.log(allTwitterTopPosts);
         setTopInstaPosts(allTwitterTopPosts);
       })
       .catch((error) => {
@@ -267,7 +270,7 @@ export default function Home() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {topFbPosts.map((post, index) => (
+                  {topInstaPosts.map((post, index) => (
                     <Tr key={index}>
                       {/* @ts-expect-error */}
                       <Link href={post.url}>
@@ -290,7 +293,7 @@ export default function Home() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {topFbPosts.map((post, index) => (
+                  {topTwitterPost.map((post, index) => (
                     <Tr key={index}>
                       {/* @ts-expect-error */}
                       <Link href={post.url}>

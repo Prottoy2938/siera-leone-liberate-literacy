@@ -37,28 +37,36 @@ Chart.register(...registerables);
 const db = getFirestore(firebase_app);
 
 const chartData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+  labels: [
+    "Week 1",
+    "Week 2",
+    "Week 3",
+    "Week 4",
+    "Week 5",
+    "Week 6",
+    "Week 7",
+  ],
   datasets: [
     {
-      label: "Facebook",
-      data: [0, 0, 0, 0, 0],
+      label: "Twitter",
+      data: [null, null, null, null, null, null, null], // Sample weekly progress data for Twitter
+      borderColor: "rgba(75, 192, 192, 1)",
+      backgroundColor: "rgba(75, 192, 192, 0.2)",
       fill: false,
-      borderColor: "#ffd400",
-      tension: 0.1,
+    },
+    {
+      label: "Facebook",
+      data: [null, null, null, null, null, null, null], // Sample weekly progress data for Facebook
+      borderColor: "rgba(255, 99, 132, 1)",
+      backgroundColor: "rgba(255, 99, 132, 0.2)",
+      fill: false,
     },
     {
       label: "Instagram",
-      data: [0, 0, 0, 0, 0],
+      data: [null, null, null, null, null, null, null], // Sample weekly progress data for Instagram
+      borderColor: "rgba(54, 162, 235, 1)",
+      backgroundColor: "rgba(54, 162, 235, 0.2)",
       fill: false,
-      borderColor: "#1DA1F2",
-      tension: 0.1,
-    },
-    {
-      label: "Twitter",
-      data: [0, 0, 0, 0, 0],
-      fill: false,
-      borderColor: "#001aff",
-      tension: 0.1,
     },
   ],
 };

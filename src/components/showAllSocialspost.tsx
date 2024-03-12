@@ -184,7 +184,13 @@ const ShowAllSocialPosts = () => {
                     {twitterPosts.map((post, index) => (
                       <Tr key={index}>
                         <Link href={post.url}>
-                          <FaTwitter /> {post.url}
+                          <HStack spacing="24px">
+                            <FaTwitter display={"inline"} color="#1877F2" />
+                            <span style={{ color: "#1877F2" }}>
+                              {" "}
+                              {post.url}
+                            </span>
+                          </HStack>
                         </Link>
                       </Tr>
                     ))}

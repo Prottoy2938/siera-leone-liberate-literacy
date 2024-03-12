@@ -94,7 +94,7 @@ export default function Home() {
 
     const twitterTopPosts = query(
       collection(db, "twitter"),
-      orderBy("public_metrics.retweet_count", "desc"),
+      orderBy("public_metrics.like_count", "desc"),
       limit(15)
     );
 

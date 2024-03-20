@@ -117,7 +117,7 @@ const ShowAllSocialPosts = () => {
                   <Tbody mt={20}>
                     {instagramPosts.map((post, index) => (
                       <Tr key={index} mt={5}>
-                        <Link href={post.url}>
+                        <Link href={post.url} isExternal>
                           <HStack spacing="24px">
                             <FaInstagram display={"inline"} color="#E4405F" />
                             <span style={{ color: "#E4405F" }}>
@@ -150,7 +150,7 @@ const ShowAllSocialPosts = () => {
                   <Tbody>
                     {facebookPosts.map((post, index) => (
                       <Tr key={index}>
-                        <Link href={post.url}>
+                        <Link href={post.url} isExternal>
                           <HStack spacing="24px">
                             <FaFacebook display={"inline"} color="#1877F2" />
                             <span style={{ color: "#1877F2" }}>
@@ -183,7 +183,7 @@ const ShowAllSocialPosts = () => {
                   <Tbody>
                     {twitterPosts.map((post, index) => (
                       <Tr key={index}>
-                        <Link href={post.url}>
+                        <Link href={post.url} isExternal>
                           <HStack spacing="24px">
                             <FaTwitter display={"inline"} color="#1877F2" />
                             <span style={{ color: "#1877F2" }}>

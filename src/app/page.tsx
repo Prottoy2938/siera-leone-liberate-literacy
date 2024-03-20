@@ -95,7 +95,7 @@ export default function Home() {
     const twitterTopPosts = query(
       collection(db, "twitter"),
       orderBy("public_metrics.like_count", "desc"),
-      limit(15)
+      limit(20)
     );
 
     getDocs(twitterTopPosts)
@@ -103,7 +103,8 @@ export default function Home() {
         const allTwitterTopPosts: any = [];
         querySnapshot.forEach((doc) => {
           allTwitterTopPosts.push(doc.data());
-          // console.log(doc.id, " => ", doc.data());
+          // allTwitterTopPosts.push(doc.data().public_metrics.like_count);
+          console.log(doc.id, " => ", doc.data().public_metrics.like_count);
         });
         console.log(allTwitterTopPosts, "twitter");
         setTopTwitterPost(allTwitterTopPosts);
@@ -257,7 +258,7 @@ export default function Home() {
                   {topFbPosts.map((post, index) => (
                     <Tr key={index}>
                       {/* @ts-expect-error */}
-                      <Link href={post.url}>
+                      <Link href={post.url} isExternal>
                         <HStack spacing="24px">
                           <FaFacebook display={"inline"} color="#1877F2" />
                           {/* @ts-expect-error */}
@@ -280,7 +281,7 @@ export default function Home() {
                   {topInstaPosts.map((post, index) => (
                     <Tr key={index}>
                       {/* @ts-expect-error */}
-                      <Link href={post.url}>
+                      <Link href={post.url} isExternal>
                         <HStack spacing="24px">
                           <FaInstagram display={"inline"} color="#1877F2" />
                           {/* @ts-expect-error */}
@@ -303,7 +304,7 @@ export default function Home() {
                   {topTwitterPost.map((post, index) => (
                     <Tr key={index}>
                       {/* @ts-expect-error */}
-                      <Link href={post.url}>
+                      <Link href={post.url} isExternal>
                         <HStack spacing="24px">
                           <FaTwitter display={"inline"} color="#1877F2" />
                           {/* @ts-expect-error */}
